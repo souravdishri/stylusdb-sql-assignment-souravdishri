@@ -13,9 +13,9 @@ test('Parse SQL Query', () => {
         joinType: null,
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     });
 });
 
@@ -35,9 +35,9 @@ test('Parse SQL Query with WHERE Clause', () => {
         joinType: null,
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     });
 });
 
@@ -48,22 +48,22 @@ test('Parse SQL Query with Multiple WHERE Clauses', () => {
         fields: ['id', 'name'],
         table: 'student',
         whereClauses: [{
-            "field": "age",
-            "operator": "=",
-            "value": "30",
+            field: "age",
+            operator: "=",
+            value: "30",
         }, {
-            "field": "name",
-            "operator": "=",
-            "value": "John",
+            field: "name",
+            operator: "=",
+            value: "John",
         }],
         joinCondition: null,
         joinTable: null,
         joinType: null,
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     });
 });
 
@@ -79,9 +79,9 @@ test('Parse SQL Query with INNER JOIN', async () => {
         joinCondition: { left: 'student.id', right: 'enrollment.student_id' },
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     })
 });
 
@@ -97,9 +97,9 @@ test('Parse SQL Query with INNER JOIN and WHERE Clause', async () => {
         joinCondition: { left: 'student.id', right: 'enrollment.student_id' },
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     })
 });
 
@@ -157,9 +157,9 @@ test('Parse LEFT Join Query Completely', () => {
         joinCondition: { left: 'student.id', right: 'enrollment.student_id' },
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     })
 })
 
@@ -175,9 +175,9 @@ test('Parse LEFT Join Query Completely', () => {
         joinCondition: { left: 'student.id', right: 'enrollment.student_id' },
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     })
 })
 
@@ -185,17 +185,17 @@ test('Parse SQL Query with LEFT JOIN with a WHERE clause filtering the main tabl
     const query = 'SELECT student.name, enrollment.course FROM student LEFT JOIN enrollment ON student.id=enrollment.student_id WHERE student.age > 22';
     const result = await parseQuery(query);
     expect(result).toEqual({
-        "fields": ["student.name", "enrollment.course"],
-        "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
-        "joinTable": "enrollment",
-        "joinType": "LEFT",
-        "table": "student",
-        "whereClauses": [{ "field": "student.age", "operator": ">", "value": "22" }],
+        fields: ["student.name", "enrollment.course"],
+        joinCondition: { "left": "student.id", "right": "enrollment.student_id" },
+        joinTable: "enrollment",
+        joinType: "LEFT",
+        table: "student",
+        whereClauses: [{ "field": "student.age", "operator": ">", "value": "22" }],
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     });
 });
 
@@ -203,17 +203,17 @@ test('Parse SQL Query with LEFT JOIN with a WHERE clause filtering the join tabl
     const query = `SELECT student.name, enrollment.course FROM student LEFT JOIN enrollment ON student.id=enrollment.student_id WHERE enrollment.course = 'Physics'`;
     const result = await parseQuery(query);
     expect(result).toEqual({
-        "fields": ["student.name", "enrollment.course"],
-        "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
-        "joinTable": "enrollment",
-        "joinType": "LEFT",
-        "table": "student",
-        "whereClauses": [{ "field": "enrollment.course", "operator": "=", "value": "'Physics'" }],
+        fields: ["student.name", "enrollment.course"],
+        joinCondition: { "left": "student.id", "right": "enrollment.student_id" },
+        joinTable: "enrollment",
+        joinType: "LEFT",
+        table: "student",
+        whereClauses: [{ "field": "enrollment.course", "operator": "=", "value": "'Physics'" }],
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     });
 });
 
@@ -221,17 +221,17 @@ test('Parse SQL Query with RIGHT JOIN with a WHERE clause filtering the main tab
     const query = 'SELECT student.name, enrollment.course FROM student RIGHT JOIN enrollment ON student.id=enrollment.student_id WHERE student.age < 25';
     const result = await parseQuery(query);
     expect(result).toEqual({
-        "fields": ["student.name", "enrollment.course"],
-        "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
-        "joinTable": "enrollment",
-        "joinType": "RIGHT",
-        "table": "student",
-        "whereClauses": [{ "field": "student.age", "operator": "<", "value": "25" }],
+        fields: ["student.name", "enrollment.course"],
+        joinCondition: { "left": "student.id", "right": "enrollment.student_id" },
+        joinTable: "enrollment",
+        joinType: "RIGHT",
+        table: "student",
+        whereClauses: [{ "field": "student.age", "operator": "<", "value": "25" }],
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     });
 });
 
@@ -239,17 +239,17 @@ test('Parse SQL Query with RIGHT JOIN with a WHERE clause filtering the join tab
     const query = `SELECT student.name, enrollment.course FROM student RIGHT JOIN enrollment ON student.id=enrollment.student_id WHERE enrollment.course = 'Chemistry'`;
     const result = await parseQuery(query);
     expect(result).toEqual({
-        "fields": ["student.name", "enrollment.course"],
-        "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
-        "joinTable": "enrollment",
-        "joinType": "RIGHT",
-        "table": "student",
-        "whereClauses": [{ "field": "enrollment.course", "operator": "=", "value": "'Chemistry'" }],
+        fields: ["student.name", "enrollment.course"],
+        joinCondition: { "left": "student.id", "right": "enrollment.student_id" },
+        joinTable: "enrollment",
+        joinType: "RIGHT",
+        table: "student",
+        whereClauses: [{ "field": "enrollment.course", "operator": "=", "value": "'Chemistry'" }],
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false,
     });
 });
 
@@ -263,12 +263,12 @@ test('Parse COUNT Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        isDistinct: false,
-        "joinCondition": null,
-        "joinTable": null,
-        "joinType": null,
+        joinCondition: null,
+        joinTable: null,
+        joinType: null,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -282,12 +282,12 @@ test('Parse SUM Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        isDistinct: false,
-        "joinCondition": null,
-        "joinTable": null,
-        "joinType": null,
+        joinCondition: null,
+        joinTable: null,
+        joinType: null,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -300,12 +300,12 @@ test('Parse AVG Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        isDistinct: false,
-        "joinCondition": null,
-        "joinTable": null,
-        "joinType": null,
+        joinCondition: null,
+        joinTable: null,
+        joinType: null,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -318,12 +318,12 @@ test('Parse MIN Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        isDistinct: false,
-        "joinCondition": null,
-        "joinTable": null,
-        "joinType": null,
+        joinCondition: null,
+        joinTable: null,
+        joinType: null,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -336,12 +336,12 @@ test('Parse MAX Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        isDistinct: false,
-        "joinCondition": null,
-        "joinTable": null,
-        "joinType": null,
+        joinCondition: null,
+        joinTable: null,
+        joinType: null,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -357,9 +357,9 @@ test('Parse basic GROUP BY query', () => {
         joinTable: null,
         joinCondition: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -375,9 +375,9 @@ test('Parse GROUP BY query with WHERE clause', () => {
         joinTable: null,
         joinCondition: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -393,9 +393,9 @@ test('Parse GROUP BY query with multiple fields', () => {
         joinTable: null,
         joinCondition: null,
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -414,9 +414,9 @@ test('Parse GROUP BY query with JOIN and WHERE clauses', () => {
             right: 'enrollment.student_id'
         },
         hasAggregateWithoutGroupBy: false,
-        isDistinct: false,
         orderByFields: null,
         limit: null,
+        isDistinct: false
     });
 });
 
@@ -438,4 +438,151 @@ test('Parse SQL Query with ORDER BY and GROUP BY', () => {
     const parsed = parseQuery(query);
     expect(parsed.orderByFields).toEqual([{ fieldName: 'age', order: 'DESC' }]);
     expect(parsed.groupByFields).toEqual(['age']);
+});
+
+test('Parse SQL Query with standard LIMIT clause', () => {
+    const query = 'SELECT id, name FROM student LIMIT 2';
+    const parsed = parseQuery(query);
+    expect(parsed.limit).toEqual(2);
+});
+
+test('Parse SQL Query with large number in LIMIT clause', () => {
+    const query = 'SELECT id, name FROM student LIMIT 1000';
+    const parsed = parseQuery(query);
+    expect(parsed.limit).toEqual(1000);
+});
+
+test('Parse SQL Query without LIMIT clause', () => {
+    const query = 'SELECT id, name FROM student';
+    const parsed = parseQuery(query);
+    expect(parsed.limit).toBeNull();
+});
+
+test('Parse SQL Query with LIMIT 0', () => {
+    const query = 'SELECT id, name FROM student LIMIT 0';
+    const parsed = parseQuery(query);
+    expect(parsed.limit).toEqual(0);
+});
+
+test('Parse SQL Query with negative number in LIMIT clause', () => {
+    const query = 'SELECT id, name FROM student LIMIT -1';
+    const parsed = parseQuery(query);
+    // Assuming the parser sets limit to null for invalid values
+    expect(parsed.limit).toBeNull();
+});
+
+test('Error Handling with Malformed Query', async () => {
+    const query = 'SELECT FROM table'; // intentionally malformed
+    expect(() => parseQuery(query)).toThrow("Query parsing error: Invalid SELECT format");
+});
+
+test('Parse SQL Query with Basic DISTINCT', () => {
+    const query = 'SELECT DISTINCT age FROM student';
+    const parsed = parseQuery(query);
+    expect(parsed).toEqual({
+        fields: ['age'],
+        table: 'student',
+        isDistinct: true,
+        whereClauses: [],
+        groupByFields: null,
+        joinType: null,
+        joinTable: null,
+        joinCondition: null,
+        orderByFields: null,
+        limit: null,
+        hasAggregateWithoutGroupBy: false
+    });
+});
+
+test('Parse SQL Query with DISTINCT and Multiple Columns', () => {
+    const query = 'SELECT DISTINCT student_id, course FROM enrollment';
+    const parsed = parseQuery(query);
+    expect(parsed).toEqual({
+        fields: ['student_id', 'course'],
+        table: 'enrollment',
+        isDistinct: true,
+        whereClauses: [],
+        groupByFields: null,
+        joinType: null,
+        joinTable: null,
+        joinCondition: null,
+        orderByFields: null,
+        limit: null,
+        hasAggregateWithoutGroupBy: false
+    });
+});
+
+test('Parse SQL Query with DISTINCT and WHERE Clause', () => {
+    const query = 'SELECT DISTINCT course FROM enrollment WHERE student_id = "1"';
+    const parsed = parseQuery(query);
+    expect(parsed).toEqual({
+        fields: ['course'],
+        table: 'enrollment',
+        isDistinct: true,
+        whereClauses: [{ field: 'student_id', operator: '=', value: '"1"' }],
+        groupByFields: null,
+        joinType: null,
+        joinTable: null,
+        joinCondition: null,
+        orderByFields: null,
+        limit: null,
+        hasAggregateWithoutGroupBy: false
+    });
+});
+
+test('Parse SQL Query with DISTINCT and JOIN Operations', () => {
+    const query = 'SELECT DISTINCT student.name FROM student INNER JOIN enrollment ON student.id = enrollment.student_id';
+    const parsed = parseQuery(query);
+    expect(parsed).toEqual({
+        fields: ['student.name'],
+        table: 'student',
+        isDistinct: true,
+        whereClauses: [],
+        groupByFields: null,
+        joinType: 'INNER',
+        joinTable: 'enrollment',
+        joinCondition: {
+            left: 'student.id',
+            right: 'enrollment.student_id'
+        },
+        orderByFields: null,
+        limit: null,
+        hasAggregateWithoutGroupBy: false
+    });
+});
+
+test('Parse SQL Query with DISTINCT, ORDER BY, and LIMIT', () => {
+    const query = 'SELECT DISTINCT age FROM student ORDER BY age DESC LIMIT 2';
+    const parsed = parseQuery(query);
+    expect(parsed).toEqual({
+        fields: ['age'],
+        table: 'student',
+        isDistinct: true,
+        whereClauses: [],
+        groupByFields: null,
+        joinType: null,
+        joinTable: null,
+        joinCondition: null,
+        orderByFields: [{ fieldName: 'age', order: 'DESC' }],
+        limit: 2,
+        hasAggregateWithoutGroupBy: false
+    });
+});
+
+test('Parse SQL Query with DISTINCT on All Columns', () => {
+    const query = 'SELECT DISTINCT * FROM student';
+    const parsed = parseQuery(query);
+    expect(parsed).toEqual({
+        fields: ['*'],
+        table: 'student',
+        isDistinct: true,
+        whereClauses: [],
+        groupByFields: null,
+        joinType: null,
+        joinTable: null,
+        joinCondition: null,
+        orderByFields: null,
+        limit: null,
+        hasAggregateWithoutGroupBy: false
+    });
 });
