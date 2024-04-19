@@ -10,6 +10,8 @@ describe('parseJoinClause', () => {
         expect(parsed).toEqual({
             fields: ['id', 'name'],
             table: 'student',
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             whereClauses: [],
             joinCondition: null,
             joinTable: null,
@@ -23,6 +25,8 @@ describe('parseJoinClause', () => {
         expect(parsed).toEqual({
             fields: ['id', 'name'],
             table: 'student',
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             whereClauses: [{
                 "field": "age",
                 "operator": "=",
@@ -40,6 +44,8 @@ describe('parseJoinClause', () => {
         expect(parsed).toEqual({
             fields: ['id', 'name'],
             table: 'student',
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             whereClauses: [{
                 "field": "age",
                 "operator": "=",
@@ -61,6 +67,8 @@ describe('parseJoinClause', () => {
         expect(result).toEqual({
             fields: ['student.name', 'enrollment.course'],
             table: 'student',
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             whereClauses: [],
             joinTable: 'enrollment',
             joinType: "INNER",
@@ -74,6 +82,8 @@ describe('parseJoinClause', () => {
         expect(result).toEqual({
             fields: ['student.name', 'enrollment.course'],
             table: 'student',
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             whereClauses: [{ field: 'student.age', operator: '>', value: '20' }],
             joinTable: 'enrollment',
             joinType: "INNER",
@@ -130,6 +140,8 @@ describe('parseJoinClause', () => {
         expect(result).toEqual({
             fields: ['student.name', 'enrollment.course'],
             table: 'student',
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             whereClauses: [],
             joinType: 'LEFT',
             joinTable: 'enrollment',
@@ -143,6 +155,8 @@ describe('parseJoinClause', () => {
         expect(result).toEqual({
             fields: ['student.name', 'enrollment.course'],
             table: 'student',
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             whereClauses: [],
             joinType: 'RIGHT',
             joinTable: 'enrollment',
@@ -155,6 +169,8 @@ describe('parseJoinClause', () => {
         const result = await parseQuery(query);
         expect(result).toEqual({
             "fields": ["student.name", "enrollment.course"],
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "LEFT",
@@ -168,6 +184,8 @@ describe('parseJoinClause', () => {
         const result = await parseQuery(query);
         expect(result).toEqual({
             "fields": ["student.name", "enrollment.course"],
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "LEFT",
@@ -181,6 +199,8 @@ describe('parseJoinClause', () => {
         const result = await parseQuery(query);
         expect(result).toEqual({
             "fields": ["student.name", "enrollment.course"],
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "RIGHT",
@@ -194,6 +214,8 @@ describe('parseJoinClause', () => {
         const result = await parseQuery(query);
         expect(result).toEqual({
             "fields": ["student.name", "enrollment.course"],
+            groupByFields: null,
+            hasAggregateWithoutGroupBy: false,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "RIGHT",

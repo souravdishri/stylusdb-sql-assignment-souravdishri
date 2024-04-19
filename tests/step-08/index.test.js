@@ -16,6 +16,8 @@ test('Parse SQL Query', () => {
     expect(parsed).toEqual({
         fields: ['id', 'name'],
         table: 'student',
+        groupByFields: null,
+        hasAggregateWithoutGroupBy: false,
         whereClauses: [],
         joinCondition: null,
         joinTable: null,
@@ -40,6 +42,8 @@ test('Parse SQL Query with WHERE Clause', () => {
     expect(parsed).toEqual({
         fields: ['id', 'name'],
         table: 'student',
+        groupByFields: null,
+        hasAggregateWithoutGroupBy: false,
         whereClauses: [{
             "field": "age",
             "operator": "=",
@@ -67,6 +71,8 @@ test('Parse SQL Query with Multiple WHERE Clauses', () => {
     expect(parsed).toEqual({
         fields: ['id', 'name'],
         table: 'student',
+        groupByFields: null,
+        hasAggregateWithoutGroupBy: false,
         whereClauses: [{
             "field": "age",
             "operator": "=",
@@ -110,6 +116,8 @@ test('Parse SQL Query with INNER JOIN', async () => {
     expect(result).toEqual({
         fields: ['student.name', 'enrollment.course'],
         table: 'student',
+        groupByFields: null,
+        hasAggregateWithoutGroupBy: false,
         whereClauses: [],
         joinTable: 'enrollment',
         joinType:'INNER',
@@ -123,6 +131,8 @@ test('Parse SQL Query with INNER JOIN and WHERE Clause', async () => {
     expect(result).toEqual({
         fields: ['student.name', 'enrollment.course'],
         table: 'student',
+        groupByFields: null,
+        hasAggregateWithoutGroupBy: false,
         whereClauses: [{ field: 'student.age', operator: '>', value: '20' }],
         joinTable: 'enrollment',
         joinType:'INNER',

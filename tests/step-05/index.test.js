@@ -17,6 +17,8 @@ test('Parse SQL Query', () => {
     expect(parsed).toEqual({
         fields: ['id', 'name'],
         table: 'student',
+        groupByFields: null,
+        hasAggregateWithoutGroupBy: false,
         whereClauses: [],
         joinTable: null, // Add this line to match the received output
         joinCondition: null, // Add this line to match the received output
@@ -40,6 +42,8 @@ test('Parse SQL Query with WHERE Clause', () => {
     expect(parsed).toEqual({
         fields: ['id', 'name'],
         table: 'student',
+        groupByFields: null,
+        hasAggregateWithoutGroupBy: false,
         whereClauses: [{
             field: 'age',
             operator: '=',
