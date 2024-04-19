@@ -24,6 +24,7 @@ test('Parse SQL Query', () => {
         joinCondition: null, // Add this line to match the received output
         joinType: null, // Add this line to match the received output
         orderByFields: null,
+        limit: null,
     });
 });
 
@@ -54,6 +55,7 @@ test('Parse SQL Query with WHERE Clause', () => {
         joinCondition: null, // Add this line to match the received output
         joinType: null, // Add this line to match the received output
         orderByFields: null,
+        limit: null,
     });
 });
 
