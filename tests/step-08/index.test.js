@@ -22,7 +22,7 @@ test('Parse SQL Query', () => {
         joinCondition: null,
         joinTable: null,
         joinType: null, // Add this line to match the received output
-
+        orderByFields: null,
     });
 });
 
@@ -52,7 +52,7 @@ test('Parse SQL Query with WHERE Clause', () => {
         joinCondition: null,
         joinTable: null,
         joinType: null, // Add this line to match the received output
-
+        orderByFields: null,
     });
 });
 
@@ -85,7 +85,7 @@ test('Parse SQL Query with Multiple WHERE Clauses', () => {
         joinCondition: null,
         joinTable: null,
         joinType: null, // Add this line to match the received output
-
+        orderByFields: null,
     });
 });
 
@@ -118,10 +118,12 @@ test('Parse SQL Query with INNER JOIN', async () => {
         table: 'student',
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
+        orderByFields: null,
         whereClauses: [],
         joinTable: 'enrollment',
         joinType:'INNER',
         joinCondition: { left: 'student.id', right: 'enrollment.student_id' }
+        
     })
 });
 
@@ -133,6 +135,7 @@ test('Parse SQL Query with INNER JOIN and WHERE Clause', async () => {
         table: 'student',
         groupByFields: null,
         hasAggregateWithoutGroupBy: false,
+        orderByFields: null,
         whereClauses: [{ field: 'student.age', operator: '>', value: '20' }],
         joinTable: 'enrollment',
         joinType:'INNER',

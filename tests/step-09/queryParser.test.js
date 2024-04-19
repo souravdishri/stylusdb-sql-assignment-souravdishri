@@ -16,6 +16,7 @@ describe('parseJoinClause', () => {
             joinCondition: null,
             joinTable: null,
             joinType: null,
+            orderByFields: null,
         });
     });
 
@@ -35,6 +36,7 @@ describe('parseJoinClause', () => {
             joinCondition: null,
             joinTable: null,
             joinType: null,
+            orderByFields: null,
         });
     });
 
@@ -58,6 +60,7 @@ describe('parseJoinClause', () => {
             joinCondition: null,
             joinTable: null,
             joinType: null,
+            orderByFields: null,
         });
     });
 
@@ -69,6 +72,7 @@ describe('parseJoinClause', () => {
             table: 'student',
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             whereClauses: [],
             joinTable: 'enrollment',
             joinType: "INNER",
@@ -84,6 +88,7 @@ describe('parseJoinClause', () => {
             table: 'student',
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             whereClauses: [{ field: 'student.age', operator: '>', value: '20' }],
             joinTable: 'enrollment',
             joinType: "INNER",
@@ -142,6 +147,7 @@ describe('parseJoinClause', () => {
             table: 'student',
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             whereClauses: [],
             joinType: 'LEFT',
             joinTable: 'enrollment',
@@ -157,6 +163,7 @@ describe('parseJoinClause', () => {
             table: 'student',
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             whereClauses: [],
             joinType: 'RIGHT',
             joinTable: 'enrollment',
@@ -171,6 +178,7 @@ describe('parseJoinClause', () => {
             "fields": ["student.name", "enrollment.course"],
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "LEFT",
@@ -186,6 +194,7 @@ describe('parseJoinClause', () => {
             "fields": ["student.name", "enrollment.course"],
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "LEFT",
@@ -201,6 +210,7 @@ describe('parseJoinClause', () => {
             "fields": ["student.name", "enrollment.course"],
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "RIGHT",
@@ -216,6 +226,7 @@ describe('parseJoinClause', () => {
             "fields": ["student.name", "enrollment.course"],
             groupByFields: null,
             hasAggregateWithoutGroupBy: false,
+            orderByFields: null,
             "joinCondition": { "left": "student.id", "right": "enrollment.student_id" },
             "joinTable": "enrollment",
             "joinType": "RIGHT",

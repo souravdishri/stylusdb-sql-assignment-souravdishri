@@ -241,10 +241,10 @@ test('Parse COUNT Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        orderByFields: null,
         "joinCondition": null,
         "joinTable": null,
         "joinType": null,
+        orderByFields: null,
     });
 });
 
@@ -258,10 +258,10 @@ test('Parse SUM Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        orderByFields: null,
         "joinCondition": null,
         "joinTable": null,
         "joinType": null,
+        orderByFields: null,
     });
 });
 
@@ -274,10 +274,10 @@ test('Parse AVG Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        orderByFields: null,
         "joinCondition": null,
         "joinTable": null,
         "joinType": null,
+        orderByFields: null,
     });
 });
 
@@ -290,10 +290,10 @@ test('Parse MIN Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        orderByFields: null,
         "joinCondition": null,
         "joinTable": null,
         "joinType": null,
+        orderByFields: null,
     });
 });
 
@@ -306,10 +306,10 @@ test('Parse MAX Aggregate Query', () => {
         whereClauses: [],
         groupByFields: null,
         hasAggregateWithoutGroupBy: true,
-        orderByFields: null,
         "joinCondition": null,
         "joinTable": null,
         "joinType": null,
+        orderByFields: null,
     });
 });
 
@@ -378,4 +378,24 @@ test('Parse GROUP BY query with JOIN and WHERE clauses', () => {
         hasAggregateWithoutGroupBy: false,
         orderByFields: null,
     });
+});
+
+test('Parse SQL Query with ORDER BY', () => {
+    const query = 'SELECT name FROM student ORDER BY name ASC';
+    const parsed = parseQuery(query);
+    expect(parsed.orderByFields).toEqual([{ fieldName: 'name', order: 'ASC' }]);
+});
+
+test('Parse SQL Query with ORDER BY and WHERE', () => {
+    const query = 'SELECT name FROM student WHERE age > 20 ORDER BY name DESC';
+    const parsed = parseQuery(query);
+    expect(parsed.orderByFields).toEqual([{ fieldName: 'name', order: 'DESC' }]);
+    expect(parsed.whereClauses.length).toBeGreaterThan(0);
+});
+
+test('Parse SQL Query with ORDER BY and GROUP BY', () => {
+    const query = 'SELECT COUNT(id), age FROM student GROUP BY age ORDER BY age DESC';
+    const parsed = parseQuery(query);
+    expect(parsed.orderByFields).toEqual([{ fieldName: 'age', order: 'DESC' }]);
+    expect(parsed.groupByFields).toEqual(['age']);
 });

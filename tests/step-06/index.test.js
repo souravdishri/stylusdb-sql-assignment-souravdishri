@@ -22,7 +22,7 @@ test('Parse SQL Query', () => {
         joinTable: null, // Add this line to match the received output
         joinCondition: null, // Add this line to match the received output
         joinType: null, // Add this line to match the received output
-
+        orderByFields: null,
     });
 });
 
@@ -52,6 +52,7 @@ test('Parse SQL Query with WHERE Clause', () => {
         joinTable: null, // Add this line to match the received output
         joinCondition: null, // Add this line to match the received output
         joinType: null, // Add this line to match the received output
+        orderByFields: null,
     });
 });
 
@@ -84,6 +85,7 @@ test('Parse SQL Query with Multiple WHERE Clauses', () => {
         joinTable: null, // Add this line to match the received output
         joinCondition: null, // Add this line to match the received output
         joinType: null, // Add this line to match the received output
+        orderByFields: null,
     });
 });
 
