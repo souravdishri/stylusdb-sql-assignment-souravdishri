@@ -1,6 +1,6 @@
 // //queryParser.test.js
 
-const { parseJoinClause, parseQuery } = require('../src/queryParser');
+const { parseJoinClause, parseQuery } = require('../../src/queryParser');
 
 describe('parseJoinClause', () => {
 

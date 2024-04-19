@@ -1,7 +1,7 @@
 // //queryExecutor.test.js
-const readCSV = require('../src/csvReader');
-const { parseQuery } = require('../src/queryParser');
-const executeSELECTQuery = require('../src/index');
+const readCSV = require('../../src/csvReader');
+const { parseQuery } = require('../../src/queryParser');
+const executeSELECTQuery = require('../../src/index');
 
 test('Execute SQL Query', async () => {
     const query = 'SELECT id, name FROM student';
