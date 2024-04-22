@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+//Shebang Line
+
 const readline = require('readline');
 const { executeSELECTQuery, executeINSERTQuery, executeDELETEQuery } = require('./queryExecutor');
 
