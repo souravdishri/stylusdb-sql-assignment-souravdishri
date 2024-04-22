@@ -51,20 +51,35 @@
 //             console.error("Validation Error:", error);
 //         }
 
+//         clearTimeout(queryTimeout); // Clear the timeout after it's done
 //         done();
 //     });
 
 //     // Introduce a delay before sending the query
-//     setTimeout(() => {
-//         cliProcess.stdin.write("SELECT DISTINCT student_id, course FROM enrollment\n");
-//         setTimeout(() => {
-//             cliProcess.stdin.write("exit\n");
-//         }, 1000); // 1 second delay
-//     }, 1000); // 1 second delay
+//     const queryTimeout = setTimeout(() => {
+//         // Check if the child process is still running before writing to stdin
+//         if (!cliProcess.killed && cliProcess.stdin.writable) {
+//             cliProcess.stdin.write("SELECT DISTINCT student_id, course FROM enrollment\n", (error) => {
+//                 if (error) {
+//                     console.error('Error writing to stdin:', error);
+//                 }
+//             });
+//             setTimeout(() => {
+//                 if (!cliProcess.killed && cliProcess.stdin.writable) {
+//                     cliProcess.stdin.write("exit\n", (error) => {
+//                         if (error) {
+//                             console.error('Error writing to stdin:', error);
+//                         }
+//                     });
+//                 } else {
+//                     console.error('Child process terminated unexpectedly before sending query');
+//                 }
+//             }, 2000); // 2 second delay for exiting
+//         } else {
+//             console.error('Child process terminated unexpectedly before sending query');
+//         }
+//     }, 1000); // 1 second delay for starting the process
 // });
-
-
-
 
 
 const child_process = require('child_process');
@@ -126,10 +141,26 @@ test('DISTINCT with Multiple Columns via CLI', (done) => {
 
     // Introduce a delay before sending the query
     const queryTimeout = setTimeout(() => {
-        cliProcess.stdin.write("SELECT DISTINCT student_id, course FROM enrollment\n");
-        setTimeout(() => {
-            cliProcess.stdin.write("exit\n");
-        }, 2000); // 2 second delay for exiting
+        // Check if the child process is still running before writing to stdin
+        if (!cliProcess.killed && cliProcess.stdin.writable) {
+            cliProcess.stdin.write("SELECT DISTINCT student_id, course FROM enrollment\n", (error) => {
+                if (error) {
+                    console.error('Error writing to stdin:', error);
+                }
+            });
+            setTimeout(() => {
+                if (!cliProcess.killed && cliProcess.stdin.writable) {
+                    cliProcess.stdin.write("exit\n", (error) => {
+                        if (error) {
+                            console.error('Error writing to stdin:', error);
+                        }
+                    });
+                } else {
+                    console.error('Child process terminated unexpectedly before sending query');
+                }
+            }, 2000); // 2 second delay for exiting
+        } else {
+            console.error('Child process terminated unexpectedly before sending query');
+        }
     }, 1000); // 1 second delay for starting the process
 });
-
